@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body{
+    background-image: url("/public/app-background.avif");
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
