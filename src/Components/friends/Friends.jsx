@@ -1,8 +1,12 @@
 import React from 'react'
-
+import { ChatList } from '../chatList/ChatList'
+import MainUser from '../Mainuser/MainUser';
 const Friends = () => {
   return (
-    <div className='flex-1'>Friends</div>
+    <div className='flex-1'>
+        <MainUser/>
+        <ChatList/>
+    </div>
   )
 }
 
