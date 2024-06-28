@@ -15,9 +15,9 @@ const ChatHead = () => {
         </div>
 
         <div className='flex items-center gap-4'>
-            <IoCall className='cursor-pointer'/>
-            <FaVideo className='cursor-pointer'/>
-            <IoMdInformationCircle className='cursor-pointer'/>
+            <IoCall className='cursor-pointer text-2xl'/>
+            <FaVideo className='cursor-pointer text-2xl'/>
+            <IoMdInformationCircle className='cursor-pointer text-2xl'/>
 
         </div>
     </div>
