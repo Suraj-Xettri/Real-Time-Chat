@@ -9,7 +9,7 @@
 
 
 body{
-    background-image: url("/public/app-background.avif");
+    background-image: url("/app-background.avif");
     height: 100vh;
     display: flex;
     justify-content: center;
