@@ -1,8 +1,11 @@
 import React from 'react'
-
+import ChatHead from './ChatHead'
 const Chat = () => {
   return (
-    <div className='flex-[2]'>Chat</div>
+    <div className='flex-[2]'>
+        <ChatHead/>
+        
+    </div>
   )
 }
 
