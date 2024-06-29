@@ -9,7 +9,7 @@ export const ChatList = () => {
         <div className="flex gap-5 items-center p-5">
             <div className="flex-1 flex items-center bg-gray-700 rounded-md">
                 <CiSearch className='text-2xl cursor-pointer font-bold text-white'/>           
-                 <input type="text" placeholder='Search' className='p-2 rounded-md flex-1 border-none outline-none bg-transparent' />
+                 <input type="text" placeholder='Search' className='p-2 rounded-md flex-1 border-none outline-none bg-transparent text-white' />
             </div>
             <IoPersonAddSharp className='cursor-pointer border border-black text-3xl rounded-full p-1'/>
         </div>

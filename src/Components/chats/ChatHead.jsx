@@ -7,7 +7,7 @@ const ChatHead = () => {
   return (
     <div className='flex p-3 justify-between items-center border-b'>
         <div className="flex items-center gap-3" >
-            <CgProfile className='text-5xl'/>
+            <CgProfile className='text-5xl cursor-pointer'/>
             <div>
                 <span className='font-semibold'>Bipina Shrestha</span>
                 <p className='text-gray-900'>She is beautifull Girl</p>
