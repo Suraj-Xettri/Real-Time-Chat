@@ -42,10 +42,9 @@ const Detail = () => {
         <FaArrowCircleUp className='text-xl font-medium text-gray-600 cursor-pointer' />
       </div>
 
-      <div className="flex items-center justify-center">
-            <button className='bg-red-500 text-white font-semibold items-center p-3 rounded-xl'>
-              Block User
-            </button>
+      <div className="flex flex-col gap-3 p-5">
+            <button className='bg-red-400 text-white font-semibold items-center p-3 rounded-xl'>Block User</button>
+            <button className='bg-green-300  text-white font-semibold items-center p-3 rounded-xl'>Log out</button>
       </div>
       
 
