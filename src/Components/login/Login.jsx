@@ -18,7 +18,7 @@ const Login = () => {
   return (
     <div className='flex w-full h-full gap-24 justify-between items-center p-5'>
       <div className='flex-1 flex flex-col gap-5 items-center'>
-        <p>Welcome To React Chat</p>
+        <h2 className='text-2xl font-bold'>Welcome To React Chat</h2>
         <form>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
@@ -42,10 +42,10 @@ const Login = () => {
               placeholder="Enter your password"
             />
           </div>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-center">
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="button"
+              type="submit"
             >
               Log In
             </button>
@@ -53,10 +53,10 @@ const Login = () => {
         </form>
       </div>
 
-      <div className="seperate"></div>
+      <div className="seperate h-[80%] w-0.5 bg-gray-300"></div>
 
       <div className='flex-1 flex flex-col gap-5 items-center'>
-        <h2>Create an Account</h2>
+        <h2 className='text-2xl font-bold'>Create an Account</h2>
         <form>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
@@ -106,10 +106,10 @@ const Login = () => {
               onChange={handleAvtar}
             />
           </div>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-center">
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="button"
+              type="submit"
             >
               Sign Up
             </button>
