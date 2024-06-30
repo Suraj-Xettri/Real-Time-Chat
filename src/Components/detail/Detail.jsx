@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaArrowCircleUp , FaArrowCircleDown } from "react-icons/fa";
+import { MdDownload } from "react-icons/md";
 const Detail = () => {
   return (
     <div className='flex-1'>
@@ -19,10 +20,35 @@ const Detail = () => {
         <FaArrowCircleUp className='text-xl font-medium text-gray-800 cursor-pointer' />
       </div>
 
-      <div className="info flex justify-between p-3 items-center">
+      <div className="info flex justify-between p-3 items-center border-b">
         <h3 className='font-semibold'>Shared photos</h3>
         <FaArrowCircleDown className='text-xl font-medium text-gray-800 cursor-pointer' />
       </div>
+
+      <div className="photoes flex justify-between p-3 items-center">
+        <div className="image flex items-center gap-4">
+          <img src="/zoro.jpg" alt="" className='w-8 h-8 rounded-full' />
+          <span className='font-light text-[14px] text-gray-700'>00zoro.pgoto.0988</span>
+        </div>
+
+        <div className="">
+          <MdDownload className='cursor-pointer text-xl' />
+        </div>
+      </div>
+
+      
+      <div className="info flex justify-between p-3 items-center">
+        <h3 className='font-semibold'>Shared Files</h3>
+        <FaArrowCircleUp className='text-xl font-medium text-gray-600 cursor-pointer' />
+      </div>
+
+      <div className="flex items-center justify-center">
+            <button className='bg-red-500 text-white font-semibold items-center p-3 rounded-xl'>
+              Block User
+            </button>
+      </div>
+      
+
 
     </div>
   )
