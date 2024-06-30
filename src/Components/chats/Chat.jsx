@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import ChatHead from './ChatHead'
 import ChatButton from './ChatButton'
 import { FaCircleUser } from "react-icons/fa6";
 const Chat = () => {
+
+  const endRef = useRef(null)
+
+  useEffect(() => {
+    endRef.current?.scrollIntoView({behavior: "smooth"})
+  },[])
   return (
     <div className='flex-[2] border-r flex flex-col'>
         <ChatHead/>
@@ -20,7 +26,7 @@ const Chat = () => {
           <div className="message flex gap-2 items-center">
             <img src="/user.png" alt="" className='w-7 h-7 rounded-full' />
             <p>What are you doing</p>      
-    </div>
+          </div>
 
           <div className="message owner flex gap-2">
             <p>fine and you</p>
@@ -30,6 +36,43 @@ const Chat = () => {
             <img src="/user.png" alt="" className='w-7 h-7 rounded-full' />
             <p>Same here dude</p>            
           </div>
+
+          <div className="message owner flex gap-2">
+            <p>hello</p>
+          </div>
+
+          <div className="message flex gap-2 items-center">
+            <img src="/user.png" alt="" className='w-7 h-7 rounded-full' />
+            <p>What are you doing</p>      
+          </div>
+
+          <div className="message owner flex gap-2">
+            <p>fine and you</p>
+          </div>
+
+          <div className="message flex gap-2">
+            <img src="/user.png" alt="" className='w-7 h-7 rounded-full' />
+            <p>Same here dude</p>            
+          </div>
+          <div className="message owner flex gap-2">
+            <p>hello</p>
+          </div>
+
+          <div className="message flex gap-2 items-center">
+            <img src="/user.png" alt="" className='w-7 h-7 rounded-full' />
+            <p>What are you doing</p>      
+          </div>
+
+          <div className="message owner flex gap-2">
+            <p>fine and you</p>
+          </div>
+
+          <div className="message flex gap-2">
+            <img src="/user.png" alt="" className='w-7 h-7 rounded-full' />
+            <p>Same here dude</p>            
+          </div>
+
+          <div ref={endRef}></div>
         </div>
         <ChatButton/>
     </div>
