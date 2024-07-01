@@ -2,6 +2,7 @@ import Chat from "./Components/chats/Chat"
 import Detail from "./Components/detail/Detail"
 import Friends from "./Components/friends/Friends"
 import Login from "./Components/login/Login"
+import Notification from "./Components/notification/Notification"
 function App() {
   const user = false
   return (
@@ -16,6 +17,7 @@ function App() {
           <Login/>
         )
         }
+        <Notification/>
     </div>
   )
 }

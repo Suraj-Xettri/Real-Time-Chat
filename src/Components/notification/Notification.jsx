@@ -1,8 +1,11 @@
 import React from 'react'
+import { ToastContainer } from 'react-toastify'
 
 const Notification = () => {
   return (
-    <div>Notification</div>
+    <div>
+      <ToastContainer position='bottom-right'/>
+    </div>
   )
 }
 
