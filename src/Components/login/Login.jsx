@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const [avtar, setAvtar] = useState({
@@ -15,11 +16,14 @@ const Login = () => {
     }
   };
 
+  const handleLogin = (e) => {
+    e.preventDefault()
+  }
   return (
     <div className='flex w-full h-full gap-24 justify-between items-center p-5'>
       <div className='flex-1 flex flex-col gap-5 items-center'>
         <h2 className='text-2xl font-bold'>Welcome To React Chat</h2>
-        <form>
+        <form onSubmit={handleLogin}>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
               Email

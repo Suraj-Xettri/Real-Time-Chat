@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import ChatHead from './ChatHead'
 import ChatButton from './ChatButton'
-import { FaCircleUser } from "react-icons/fa6";
+
 const Chat = () => {
 
   const endRef = useRef(null)
