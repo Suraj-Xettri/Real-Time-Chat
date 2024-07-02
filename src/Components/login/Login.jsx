@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+
+import { auth, db } from '../../library/Firebase';
+import { doc, setDoc } from 'firebase/firestore';
 
 const Login = () => {
   const [avtar, setAvtar] = useState({
     file: null,
     url: ''
   });
+
+ 
 
   const handleAvtar = (e) => {
     if (e.target.files[0]) {
@@ -15,6 +21,32 @@ const Login = () => {
       });
     }
   };
+
+  const handleRegister = async (e) => {
+    e.preventDefault()
+    const formData = new FormData(e.target)
+    const {username, email, password} = Object.fromEntries(formData)
+    try {
+
+      const res = await createUserWithEmailAndPassword(auth, email, password)
+      
+      await setDoc(doc(db, "Users", res.user.uid),{
+        username,
+        email,
+        id: res.user.uid,
+        blocked: []
+      })
+
+      await setDoc(doc(db, "usersChats", res.user.uid),{
+        chats:[]
+      })
+
+      toast.success("Account Created!")
+    } catch (er) {
+      toast.error(er.message)
+      
+    }
+  }
 
   const handleLogin = (e) => {
     e.preventDefault()
@@ -33,6 +65,7 @@ const Login = () => {
               type="email"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               placeholder="Enter your email"
+              name='email'
             />
           </div>
           <div className="mb-6">
@@ -44,6 +77,7 @@ const Login = () => {
               type="password"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               placeholder="Enter your password"
+              name='password'
             />
           </div>
           <div className="flex items-center justify-center">
@@ -61,7 +95,7 @@ const Login = () => {
 
       <div className='flex-1 flex flex-col gap-5 items-center'>
         <h2 className='text-2xl font-bold'>Create an Account</h2>
-        <form>
+        <form onSubmit={handleRegister}>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
               Username
