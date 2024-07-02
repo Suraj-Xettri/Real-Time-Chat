@@ -12,7 +12,7 @@ const Login = () => {
     url: ''
   });
 
- 
+const [loading, setLoading] = useState(false)
 
   const handleAvtar = (e) => {
     if (e.target.files[0]) {
@@ -25,6 +25,7 @@ const Login = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault()
+    setLoading(true)
     const formData = new FormData(e.target)
     const {username, email, password} = Object.fromEntries(formData)
     try {
@@ -49,6 +50,8 @@ const Login = () => {
     } catch (er) {
       toast.error(er.message)
       
+    } finally{
+      setLoading(false)
     }
   }
 
@@ -85,8 +88,8 @@ const Login = () => {
             />
           </div>
           <div className="flex items-center justify-center">
-            <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            <button disabled = {loading}
+              className="loading bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >
               Log In
@@ -150,7 +153,8 @@ const Login = () => {
           </div>
           <div className="flex items-center justify-center">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              disabled = {loading}
+              className="bg-blue-500 loading hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >
               Sign Up

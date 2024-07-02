@@ -21,6 +21,11 @@ body{
 
 }
 
+.loading:disabled{
+    cursor: not-allowed;
+    background-color: blanchedalmond;
+}
+
 .message{
     max-width: 70%;
     &.owner{
