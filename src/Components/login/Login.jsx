@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 import { auth, db } from '../../library/Firebase';
 import { doc, setDoc } from 'firebase/firestore';
+import upload from '../../library/upload';
 
 const Login = () => {
   const [avtar, setAvtar] = useState({
@@ -28,11 +29,14 @@ const Login = () => {
     const {username, email, password} = Object.fromEntries(formData)
     try {
 
+      const imgurl = await upload(avtar.file)
+
       const res = await createUserWithEmailAndPassword(auth, email, password)
       
       await setDoc(doc(db, "Users", res.user.uid),{
         username,
         email,
+        avtar: imgurl,
         id: res.user.uid,
         blocked: []
       })
