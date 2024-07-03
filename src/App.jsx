@@ -13,11 +13,7 @@ function App() {
 
   useEffect(() => {
     const unSub = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        fetchUserInfo(user.uid).catch((error) => {
-          console.error("Failed to fetch user info:", error);
-        });
-      }
+      fetchUserInfo(user?.uid)
     });
     return () => {
       unSub();

@@ -1,6 +1,7 @@
 import React from 'react'
 import { FaArrowCircleUp , FaArrowCircleDown } from "react-icons/fa";
 import { MdDownload } from "react-icons/md";
+import { auth } from '../../library/Firebase';
 const Detail = () => {
   return (
     <div className='flex-1'>
@@ -44,7 +45,7 @@ const Detail = () => {
 
       <div className="flex flex-col gap-3 p-5">
             <button className='bg-red-400 text-white font-semibold items-center p-3 rounded-xl'>Block User</button>
-            <button className='bg-green-300  text-white font-semibold items-center p-3 rounded-xl'>Log out</button>
+            <button className='bg-green-300  text-white font-semibold items-center p-3 rounded-xl' onClick={() => auth.signOut()} >Log out</button>
       </div>
       
 
