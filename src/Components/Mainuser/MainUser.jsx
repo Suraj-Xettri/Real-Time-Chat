@@ -1,14 +1,18 @@
 import React from 'react'
 import { CgProfile } from "react-icons/cg";
 import { IoIosMore } from "react-icons/io";
+import { userStore } from '../../library/userStore';
+
 import { FaVideo , FaEdit  } from "react-icons/fa";
 const MainUser = () => {
+  const { currentUser} = userStore();
+
   return (
     <>
         <div className="flex p-3 items-center justify-between">
             <div className="flex items-center gap-2 text-xl">
-                <CgProfile className='text-3xl cursor-pointer'/>
-                <h1>Suraj Thapa</h1>
+                <img src={currentUser.avatar || "/user.png"} alt="Profile" className='w-12 h-12 rounded-full'/>
+                <h1>{currentUser.username}</h1>
             </div>
 
             <div className="flex items-center gap-3 text-xl ">
