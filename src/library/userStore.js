@@ -3,7 +3,7 @@ import { create } from 'zustand'
 import { db } from './Firebase';
 import { doc } from 'firebase/firestore';
 
-const useStore = create((set) => ({
+const userStore = create((set) => ({
   currentUser: null,
   isLoading: true,
   fetchUserInfo: async (uid) => {
@@ -24,3 +24,5 @@ const useStore = create((set) => ({
     }
   }
 }))
+
+export default userStore
