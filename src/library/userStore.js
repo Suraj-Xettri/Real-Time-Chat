@@ -1,16 +1,16 @@
 
 import { create } from 'zustand'
 import { db } from './Firebase';
-import { doc } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 
-const userStore = create((set) => ({
+export const userStore = create((set) => ({
   currentUser: null,
   isLoading: true,
   fetchUserInfo: async (uid) => {
     if(!uid) return set({currentUser:null, isLoading:false})
 
     try {
-        const docRef = doc(db, "users", uid);
+        const docRef = doc(db, "Users", uid);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
@@ -25,4 +25,3 @@ const userStore = create((set) => ({
   }
 }))
 
-export default userStore
