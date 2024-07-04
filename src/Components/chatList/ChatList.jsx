@@ -1,10 +1,33 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IoPersonAddSharp } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
 import { HiUserCircle } from "react-icons/hi2";
 import Adduser from '../addUser/Adduser'
+import { doc, onSnapshot } from "firebase/firestore";
+
+import { userStore } from '../../library/userStore';
+import { db } from '../../library/Firebase';
+
 export const ChatList = () => {
   const [addMOde, setAddMode] = useState(false);
+
+  const [chats, setChats] = useState([]);
+
+
+  const {currentUser} = userStore()
+
+  useEffect(() => {
+    
+  const unsub = onSnapshot(doc(db, "usersChats", currentUser.id), (doc) => {
+    setChats(doc.data());
+  })
+  return () => {
+    unsub()
+  }
+  },[currentUser.id]);
+
+  console.log(chats)
+
   return (
     <div>
         <div className="flex gap-5 items-center p-5">

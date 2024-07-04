@@ -1,5 +1,4 @@
 import React from 'react'
-import { CgProfile } from "react-icons/cg";
 import { IoIosMore } from "react-icons/io";
 import { userStore } from '../../library/userStore';
 
