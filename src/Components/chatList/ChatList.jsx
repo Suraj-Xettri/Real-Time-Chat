@@ -3,7 +3,7 @@ import { IoPersonAddSharp } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
 import { HiUserCircle } from "react-icons/hi2";
 import Adduser from '../addUser/Adduser'
-import { doc, onSnapshot } from "firebase/firestore";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 
 import { userStore } from '../../library/userStore';
 import { db } from '../../library/Firebase';
@@ -18,15 +18,24 @@ export const ChatList = () => {
 
   useEffect(() => {
     
-  const unsub = onSnapshot(doc(db, "usersChats", currentUser.id), (doc) => {
-    setChats(doc.data());
-  })
+  const unsub = onSnapshot(doc(db, "usersChats", currentUser.id), async (res) => {
+    const items = res.data().chats
+    
+    const promises = items.map(async (items) =>{
+      const userDocRef = doc(db, "users", items.receiverId)
+      const userDocSnap = await getDoc(userDocRef)
+
+      const user = userDocSnap.data()
+
+      return {...items, user}
+    } )
+
+    const chatData = await promises
+
   return () => {
     unsub()
   }
   },[currentUser.id]);
-
-  console.log(chats)
 
   return (
     <div>
@@ -38,24 +47,16 @@ export const ChatList = () => {
             <IoPersonAddSharp className='cursor-pointer border border-black text-3xl rounded-full p-1' onClick={() => setAddMode((p) => !p)}/>
         </div>
       <div className="messages flex flex-col">
-          <div className="flex p-5 gap-5 cursor-pointer items-center border-b">
-                  {/* <img src="" alt="" /> */}
-                  <HiUserCircle className='text-5xl'/>
+        {chats.map((chat) => {
+            <div className="flex p-5 gap-5 cursor-pointer items-center border-b" key={chat.chatId}>
+              <HiUserCircle className='text-5xl'/>
               <div className="flex flex-col">
                 <span className='font-semibold'>Suraj xettri</span>
-                <p>Hello</p>
+                <p>{chat.lastMessage}</p>
               </div>
-          </div>
-
-          <div className="flex p-5 gap-2 items-center border-b">
-                  {/* <img src="" alt="" /> */}
-                  <HiUserCircle className='text-5xl'/>
-              <div className="">
-                <span className='font-semibold'>Suraj xettri</span>
-                <p>Hello</p>
-              </div>
-          </div>
-
+            </div>
+        })}
+          
       </div>
         {addMOde && <Adduser/>}
     </div>
