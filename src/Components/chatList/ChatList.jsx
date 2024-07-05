@@ -17,26 +17,28 @@ export const ChatList = () => {
   const {currentUser} = userStore()
 
   useEffect(() => {
-    
-  const unsub = onSnapshot(doc(db, "usersChats", currentUser.id), async (res) => {
-    const items = res.data().chats
-    
-    const promises = items.map(async (items) =>{
-      const userDocRef = doc(db, "users", items.receiverId)
-      const userDocSnap = await getDoc(userDocRef)
+    if (!currentUser) return;
+  
+    const unsub = onSnapshot(doc(db, "usersChats", currentUser.id), async (res) => {
+      const items = res.data().chats || []; // Ensure items is not undefined
+  
+      const promises = items.map(async (item) => {
+        const userDocRef = doc(db, "users", item.receiverId);
+        const userDocSnap = await getDoc(userDocRef);
+        const user = userDocSnap.data();
 
-      const user = userDocSnap.data()
-
-      return {...items, user}
-    } )
-
-    const chatData = await promises
-
-  return () => {
-    unsub()
-  }
-  },[currentUser.id]);
-
+        return { ...item, user };
+      });
+  
+      const chatData = await Promise.all(promises);
+      setChats(chatData.sort((a,b) => b.updatedAt - a.updatedAt));
+    });
+  
+    return () => {
+      unsub();
+    };
+  }, [currentUser]);
+  
   return (
     <div>
         <div className="flex gap-5 items-center p-5">
@@ -62,3 +64,4 @@ export const ChatList = () => {
     </div>
   )
 }
+
