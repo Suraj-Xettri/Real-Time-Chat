@@ -1,18 +1,28 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ChatHead from './ChatHead'
 import ChatButton from './ChatButton'
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from '../../library/Firebase';
 
 const Chat = () => {
 
+  const [chat, setChat] = useState()
   const endRef = useRef(null)
 
   useEffect(() => {
     endRef.current?.scrollIntoView({behavior: "smooth"})
   },[])
 
-  // useEffect(() => {
-  //   const unSub = onSnapshot(doc(db, "chats", ))
-  // })
+  useEffect(() => {
+    const unSub = onSnapshot(doc(db, "chats", "oBvWGL9NWJsXOmr27dpO"), (res) => {
+        setChat(res.data())
+    })
+    return () => {
+      unSub()
+    }
+  },[])
+console.log(chat)
+
   return (
     <div className='flex-[2] border-r flex flex-col'>
         <ChatHead/>
