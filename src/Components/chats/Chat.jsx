@@ -9,6 +9,10 @@ const Chat = () => {
   useEffect(() => {
     endRef.current?.scrollIntoView({behavior: "smooth"})
   },[])
+
+  useEffect(() => {
+    const unSub = onSnapshot(doc(db, "chats", ))
+  })
   return (
     <div className='flex-[2] border-r flex flex-col'>
         <ChatHead/>
