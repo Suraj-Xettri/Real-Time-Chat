@@ -4,7 +4,7 @@ import { CiSearch } from "react-icons/ci";
 import { HiUserCircle } from "react-icons/hi2";
 import Adduser from '../addUser/Adduser';
 import { doc, getDoc, onSnapshot } from "firebase/firestore";
-
+import { userChatStore } from '../../library/chatStore';
 import { userStore } from '../../library/userStore'; // Ensure this is the correct import for your user store
 import { db } from '../../library/Firebase';
 
@@ -14,6 +14,7 @@ export const ChatList = () => {
 
   const currentUser = userStore((state) => state.currentUser); // Use appropriate method to get currentUser
 
+  const {changeChat} = userChatStore()
   useEffect(() => {
     if (!currentUser) return;
   
@@ -37,6 +38,11 @@ export const ChatList = () => {
     };
   }, [currentUser]);
   
+  const handleSelect = async (chat) =>{
+    changeChat(chat.chatId, chat.user)
+  }
+
+
   return (
     <div>
       <div className="flex gap-5 items-center p-5">
@@ -48,7 +54,7 @@ export const ChatList = () => {
       </div>
       <div className="messages flex flex-col">
         {chats.map((chat,i) => (
-          <div className="flex p-5 gap-5 cursor-pointer items-center border-b" key={i}>
+          <div onClick={() => handleSelect(chat)} className="flex p-5 gap-5 cursor-pointer items-center border-b" key={i}>
             <HiUserCircle className='text-5xl' />
             <div className="flex flex-col">
               <span className='font-semibold'>{chat.user.username}</span>
