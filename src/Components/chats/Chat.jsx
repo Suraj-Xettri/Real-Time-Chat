@@ -15,7 +15,7 @@ const Chat = () => {
   const [message, setMessage] = useState("");
 
   const { currentUser } = userStore();
-  const { chatId, user } = userChatStore();
+  const { chatId, user, isCurrentUSerBlocked, isReceiverBlocked } = userChatStore();
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -94,13 +94,17 @@ const Chat = () => {
           <IoCameraSharp className='cursor-pointer' />
           <MdKeyboardVoice className='cursor-pointer' />
         </div>
-        <input type="text" onChange={handleMessage} placeholder='Type a message' className='p-2 flex-1 border-none rounded-xl bg-gray-700 outline-none text-white' />
+        <input type="text" onChange={handleMessage} 
+        placeholder='Type a message' 
+        className='p-2 flex-1 border-none rounded-xl bg-gray-700 outline-none text-white' 
+        disabled = {isCurrentUSerBlocked || isReceiverBlocked}
+        />
 
         <div>
           <FaRegFaceSmile className='text-2xl cursor-pointer' />
         </div>
 
-        <button onClick={handleSend}>Send</button>
+        <button onClick={handleSend} disabled = {isCurrentUSerBlocked || isReceiverBlocked}>Send</button>
       </div>
     </div>
   );
