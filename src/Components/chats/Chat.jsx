@@ -56,10 +56,10 @@ const Chat = () => {
           const userChatsData = userChatSnapshot.data();
 
           const chatIndex = userChatsData.chats.findIndex(
-            c => c.chatId === chatId
+            (c) => c.chatId === chatId
           );
 
-          userChatsData.chats[chatIndex].lastMessage = true;
+          userChatsData.chats[chatIndex].lastMessage = message;
           userChatsData.chats[chatIndex].isSeen =
             id === currentUser.id ? true : false;
           userChatsData.chats[chatIndex].updatedAt = Date.now();
