@@ -16,7 +16,7 @@ export const ChatList = () => {
 
   const currentUser = userStore((state) => state.currentUser); // Use appropriate method to get currentUser
 
-  const {changeChat} = userChatStore()
+  const {changeChat, isCurrentUSerBloked, isReceiverBloked} = userChatStore()
 
   useEffect(() => {
     if (!currentUser) return;
@@ -84,9 +84,9 @@ export const ChatList = () => {
       <div className="messages flex flex-col">
         {filteredChats.map((chat,i) => (
           <div onClick={() => handleSelect(chat)} className="flex p-5 gap-5 cursor-pointer items-center border-b" key={i} style={{backgroundColor: chat?.isSeen ? "transparent": "#5183fe"}}>
-            <HiUserCircle className='text-5xl' />
+            <img src={isCurrentUSerBloked || isReceiverBloked? "/user.png":chat.user?.avatar || "/user.png"} className='w-10 h-10 rounded-full cursor-pointer'/>
             <div className="flex flex-col">
-              <span className='font-semibold'>{chat.user.username}</span>
+              <span className='font-semibold'>{isCurrentUSerBloked || isReceiverBloked? "User": chat.user.username}</span>
               <p>{chat.lastMessage}</p>
             </div>
           </div>

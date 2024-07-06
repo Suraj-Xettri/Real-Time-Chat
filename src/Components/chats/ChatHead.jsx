@@ -5,7 +5,7 @@ import { IoMdInformationCircle } from "react-icons/io";
 import { userChatStore } from '../../library/chatStore';
 const ChatHead = () => {
 
-  const {chatId, user, isCurrentUSerBloked, isReceiverBloked, changeBlock} =
+  const {user, isCurrentUSerBloked, isReceiverBloked} =
   userChatStore()
   return (
     <div className='flex p-3 justify-between items-center border-b'>
@@ -21,7 +21,6 @@ const ChatHead = () => {
             <IoCall className='cursor-pointer text-2xl'/>
             <FaVideo className='cursor-pointer text-2xl'/>
             <IoMdInformationCircle className='cursor-pointer text-2xl'/>
-
         </div>
     </div>
   )
