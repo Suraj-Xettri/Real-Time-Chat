@@ -1,17 +1,27 @@
 import React from 'react'
 import { FaArrowCircleUp , FaArrowCircleDown } from "react-icons/fa";
 import { MdDownload } from "react-icons/md";
-import { auth } from '../../library/Firebase';
+import { auth, db } from '../../library/Firebase';
 import { userStore } from '../../library/userStore';
 import { userChatStore } from '../../library/chatStore';
+import { arrayRemove, arrayUnion, updateDoc } from 'firebase/firestore';
 const Detail = () => {
 
   const {chatId, user, isCurrentUSerBlocked, isReceiverBlocked, changeBlock} =
   userChatStore()
   const {currentUser} = userStore()
 
-  const handleBlock = () => {
-
+  const handleBlock = async () => {
+    if(!user) return
+    const userDocRef = doc(db,"Users", currentUser.id)
+    try {
+      await updateDoc(userDocRef,{
+        blocked: isReceiverBlocked? arrayRemove(user.id) : arrayUnion(user.id)
+      })
+      changeBlock()
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -55,7 +65,10 @@ const Detail = () => {
       </div>
 
       <div className="flex flex-col gap-3 p-5">
-            <button className='bg-red-400 text-white font-semibold items-center p-3 rounded-xl' onClick={handleBlock}>Block User</button>
+            <button className='bg-red-400 text-white font-semibold items-center p-3 rounded-xl' onClick={handleBlock}>{
+              isCurrentUSerBlocked? "You are Blocked! ": isReceiverBlocked ? "User Blocked" : "Block User"
+              
+              }</button>
             <button className='bg-green-300  text-white font-semibold items-center p-3 rounded-xl' onClick={() => auth.signOut()} >Log out</button>
       </div>
       
