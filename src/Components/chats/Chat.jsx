@@ -54,7 +54,6 @@ const Chat = () => {
 
         if (userChatSnapshot.exists()) {
           const userChatsData = userChatSnapshot.data();
-
           const chatIndex = userChatsData.chats.findIndex(
             (c) => c.chatId === chatId
           );

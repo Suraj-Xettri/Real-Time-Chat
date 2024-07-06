@@ -3,7 +3,7 @@ import { IoPersonAddSharp } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
 import { HiUserCircle } from "react-icons/hi2";
 import Adduser from '../addUser/Adduser';
-import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import { doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
 import { userChatStore } from '../../library/chatStore';
 import { userStore } from '../../library/userStore'; // Ensure this is the correct import for your user store
 import { db } from '../../library/Firebase';
@@ -14,7 +14,8 @@ export const ChatList = () => {
 
   const currentUser = userStore((state) => state.currentUser); // Use appropriate method to get currentUser
 
-  const {changeChat} = userChatStore()
+  const {changeChat, chatId} = userChatStore()
+
   useEffect(() => {
     if (!currentUser) return;
   
@@ -39,7 +40,30 @@ export const ChatList = () => {
   }, [currentUser]);
   
   const handleSelect = async (chat) =>{
-    changeChat(chat.chatId, chat.user)
+    const userChats = chats.map((item) => {
+      const {user, ...rest} = item
+      return rest
+    })
+
+    const chatIndex = userChats.findIndex(
+      (item) => item.chatId === chat.chatId)
+    
+      userChats[chatIndex].isSeen = true
+
+      const userChatRef = doc(db,"usersChats", currentUser.id)
+
+      try {
+        await updateDoc(userChatRef, {
+          chats: userChats
+        })
+        changeChat(chat.chatId, chat.user)
+
+      } catch (error) {
+        console.log(error)
+      }
+
+
+
   }
 
 
@@ -54,7 +78,7 @@ export const ChatList = () => {
       </div>
       <div className="messages flex flex-col">
         {chats.map((chat,i) => (
-          <div onClick={() => handleSelect(chat)} className="flex p-5 gap-5 cursor-pointer items-center border-b" key={i}>
+          <div onClick={() => handleSelect(chat)} className="flex p-5 gap-5 cursor-pointer items-center border-b" key={i} style={{backgroundColor: chat?.isSeen ? "transparent": "#5183fe"}}>
             <HiUserCircle className='text-5xl' />
             <div className="flex flex-col">
               <span className='font-semibold'>{chat.user.username}</span>
