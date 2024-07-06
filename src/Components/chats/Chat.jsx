@@ -15,7 +15,7 @@ const Chat = () => {
   const [message, setMessage] = useState("");
 
   const { currentUser } = userStore();
-  const { chatId, user, isCurrentUSerBlocked, isReceiverBlocked } = userChatStore();
+  const { chatId, user, isCurrentUSerBloked, isReceiverBloked } = userChatStore();
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -88,24 +88,30 @@ const Chat = () => {
         <div ref={endRef}></div>
       </div>
 
-      <div className='flex border-t justify-between p-3 items-center gap-3'>
-        <div className='flex gap-3 text-2xl'>
-          <FaRegImage className='cursor-pointer' />
-          <IoCameraSharp className='cursor-pointer' />
-          <MdKeyboardVoice className='cursor-pointer' />
-        </div>
-        <input type="text" onChange={handleMessage} 
-        placeholder='Type a message' 
-        className='p-2 flex-1 border-none rounded-xl bg-gray-700 outline-none text-white' 
-        disabled = {isCurrentUSerBlocked || isReceiverBlocked}
-        />
 
-        <div>
-          <FaRegFaceSmile className='text-2xl cursor-pointer' />
-        </div>
+      {isCurrentUSerBloked || isReceiverBloked ? 
 
-        <button onClick={handleSend} disabled = {isCurrentUSerBlocked || isReceiverBlocked}>Send</button>
-      </div>
+        <div className="flex border-t justify-center items-center gap-3 p-2 text-xl">
+        <p>The person is not available</p> 
+        </div>:
+        <div className='flex border-t justify-between p-3 items-center gap-3'>
+          <div className='flex gap-3 text-2xl'>
+            <FaRegImage className='cursor-pointer' />
+            <IoCameraSharp className='cursor-pointer' />
+            <MdKeyboardVoice className='cursor-pointer' />
+          </div>
+          <input type="text" onChange={handleMessage} 
+          placeholder={isCurrentUSerBloked || isReceiverBloked ? 'You Cannot message this person' : 'Type a message' } 
+          className='p-2 flex-1 border-none rounded-xl bg-gray-700 outline-none text-white' 
+          />
+
+          <div>
+            <FaRegFaceSmile className='text-2xl cursor-pointer' />
+          </div>
+
+          <button onClick={handleSend} className='border p-2 rounded-xl'>Send</button>
+        </div>
+       }   
     </div>
   );
 };
