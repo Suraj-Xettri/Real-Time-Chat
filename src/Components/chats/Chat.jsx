@@ -79,7 +79,7 @@ const Chat = () => {
 
       <div className='chat flex-1 p-3 flex flex-col gap-5 overflow-scroll'>
         {chat?.messages?.map((message) => (
-          <div className="message flex gap-2" key={message.createdAt}>
+          <div className={message.senderId === currentUser.id ?"message owner flex gap-2": "message flex gap-2"} key={message.createdAt}>
             <img src="/user.png" alt="" className='w-7 h-7 rounded-full' />
             <p>{message.message}</p>
           </div>

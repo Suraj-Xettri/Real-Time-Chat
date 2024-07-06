@@ -2,12 +2,23 @@ import React from 'react'
 import { FaArrowCircleUp , FaArrowCircleDown } from "react-icons/fa";
 import { MdDownload } from "react-icons/md";
 import { auth } from '../../library/Firebase';
+import { userStore } from '../../library/userStore';
+import { userChatStore } from '../../library/chatStore';
 const Detail = () => {
+
+  const {chatId, user, isCurrentUSerBlocked, isReceiverBlocked, changeBlock} =
+  userChatStore()
+  const {currentUser} = userStore()
+
+  const handleBlock = () => {
+
+  }
+
   return (
     <div className='flex-1'>
       <div className="flex flex-col items-center gap-4 p-5 border-b">
-        <img src="/user.png" alt="" className='w-28 h-28 rounded-full' />
-        <h2 className='font-semibold text-2xl'>Bipina Shrestha</h2>
+        <img src={user?.avtar || "/user.png"} alt="" className='w-28 h-28 rounded-full' />
+        <h2 className='font-semibold text-2xl'>{user?.username}</h2>
         <p>Hello my prince how is life going</p>
       </div>
 
@@ -44,7 +55,7 @@ const Detail = () => {
       </div>
 
       <div className="flex flex-col gap-3 p-5">
-            <button className='bg-red-400 text-white font-semibold items-center p-3 rounded-xl'>Block User</button>
+            <button className='bg-red-400 text-white font-semibold items-center p-3 rounded-xl' onClick={handleBlock}>Block User</button>
             <button className='bg-green-300  text-white font-semibold items-center p-3 rounded-xl' onClick={() => auth.signOut()} >Log out</button>
       </div>
       
