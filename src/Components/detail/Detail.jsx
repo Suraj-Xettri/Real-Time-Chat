@@ -27,9 +27,9 @@ const Detail = () => {
   return (
     <div className='flex-1'>
       <div className="flex flex-col items-center gap-4 p-5 border-b">
-        <img src={user?.avatar || "/user.png"} alt="" className='w-28 h-28 rounded-full' />
-        <h2 className='font-semibold text-2xl'>{user?.username}</h2>
-        <p>Hello my prince how is life going</p>
+        <img src={isCurrentUSerBloked || isReceiverBloked? "/user.png":user?.avatar || "/user.png"} alt="" className='w-28 h-28 rounded-full' />
+        <h2 className='font-semibold text-2xl'>{isCurrentUSerBloked || isReceiverBloked? "User" :user?.username}</h2>
+        <p>{isCurrentUSerBloked || isReceiverBloked? "You cannot get access to this person" :"Hello stay in touch through chatting"}</p>
       </div>
 
       <div className="info flex justify-between p-3 items-center">
