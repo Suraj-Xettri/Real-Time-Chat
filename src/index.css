@@ -30,6 +30,10 @@ body{
     max-width: 70%;
     &.owner{
         align-self: flex-end;
+
+        image{
+            display: none;
+        }
         
 
         p{
