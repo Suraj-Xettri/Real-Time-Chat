@@ -28,7 +28,7 @@ const Login = () => {
     const formData = new FormData(e.target);
     const { username, email, password } = Object.fromEntries(formData);
 
-    if (!username || !email || !password || !avatar.file) {
+    if (!username || !email || !password) {
       toast.error("All fields are required!");
       setLoading(false);
       return;
@@ -155,18 +155,20 @@ const Login = () => {
               name='password'
             />
           </div>
+
           <div className="mb-6">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="image">
-              Upload Image
+            <label className="block text-gray-700 cursor-pointer text-sm font-bold mb-2" htmlFor="file">
+              <img src={avatar.url || "/user.png"} alt="User Image" className='w-10 h-10 rounded-full' /> Upload an Image
             </label>
-            <img src={avatar.url || "/zoro.jpg"} alt="Url Avatar" className='w-10 h-10 rounded-full' />
             <input
-              id="image"
+              id="file"
               type="file"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              style={{display:"none"}}
               onChange={handleAvatar}
             />
           </div>
+
+
           <div className="flex items-center justify-center">
             <button
               disabled={loading}

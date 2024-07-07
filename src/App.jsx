@@ -25,7 +25,9 @@ function App() {
   console.log(currentUser);
 
   if (isLoading) return <div className="p-12 text-4xl rounded-xl bg-gray-600">Loading....</div>;
+
   return (
+    <>
     <div className="h-[90vh] w-[90vw] flex bg-blue-200/50 rounded-md backdrop-blur-sm backdrop-saturate-150">
       {currentUser ? (
         <>
@@ -36,8 +38,12 @@ function App() {
       ) : (
         <Login />
       )}
-      <Notification />
+      
     </div>
+
+    <Notification />
+    </>
+    
   );
 }
 
