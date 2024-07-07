@@ -90,7 +90,7 @@ export const ChatList = () => {
             <img src={isCurrentUSerBloked || isReceiverBloked? "/user.png":chat.user?.avatar || "/user.png"} className='w-10 h-10 rounded-full cursor-pointer'/>
             <div className="flex flex-col">
               <span className='font-semibold'>{isCurrentUSerBloked || isReceiverBloked? "User": chat.user.username}</span>
-              <p>{chat.lastMessage}</p>
+              <p className='text-gray-600'>{chat.lastMessage}</p>
             </div>
           </div>
         ))}
