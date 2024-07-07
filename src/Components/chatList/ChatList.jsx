@@ -68,6 +68,9 @@ export const ChatList = () => {
 
   }
 
+  const AddModeOn = (e) => {
+    setAddMode((p) => !p)
+  }
   const filteredChats = chats.filter((c) => 
     c.user.username.toLowerCase().includes(input.toLowerCase()))
 
@@ -79,7 +82,7 @@ export const ChatList = () => {
           <CiSearch className='text-2xl cursor-pointer font-bold text-white' />           
           <input type="text" placeholder='Search' className='p-2 rounded-md flex-1 border-none outline-none bg-transparent text-white' onChange={(e) => setInput(e.target.value)} />
         </div>
-        <IoPersonAddSharp className='cursor-pointer border border-black text-3xl rounded-full p-1' onClick={() => setAddMode((p) => !p)} />
+        <IoPersonAddSharp className='cursor-pointer border border-black text-3xl rounded-full p-1' onClick={AddModeOn} />
       </div>
       <div className="messages flex flex-col">
         {filteredChats.map((chat,i) => (
@@ -92,7 +95,7 @@ export const ChatList = () => {
           </div>
         ))}
       </div>
-      {addMode && <Adduser />}
+      {addMode && <Adduser  />}
     </div>
   );
 }
