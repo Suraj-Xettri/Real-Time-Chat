@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { IoPersonAddSharp } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
-import { HiUserCircle } from "react-icons/hi2";
 import Adduser from '../addUser/Adduser';
 import { doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
 import { userChatStore } from '../../library/chatStore';
@@ -68,7 +67,7 @@ export const ChatList = () => {
 
   }
 
-  const AddModeOn = (e) => {
+  const AddModeOn = () => {
     setAddMode((p) => !p)
   }
   const filteredChats = chats.filter((c) => 
@@ -84,7 +83,10 @@ export const ChatList = () => {
         </div>
         <IoPersonAddSharp className='cursor-pointer border border-black text-3xl rounded-full p-1' onClick={AddModeOn} />
       </div>
-      <div className="messages flex flex-col">
+
+      {addMode && <Adduser AddModeOn={AddModeOn} />}
+
+      <div className="messages h-[500px] chat p-3 flex flex-col gap-5 overflow-scroll">
         {filteredChats.map((chat,i) => (
           <div onClick={() => handleSelect(chat)} className="flex p-5 gap-5 cursor-pointer items-center border-b" key={i} style={{backgroundColor: chat?.isSeen ? "transparent": "#5183fe"}}>
             <img src={isCurrentUSerBloked || isReceiverBloked? "/user.png":chat.user?.avatar || "/user.png"} className='w-10 h-10 rounded-full cursor-pointer'/>
@@ -94,8 +96,7 @@ export const ChatList = () => {
             </div>
           </div>
         ))}
-      </div>
-      {addMode && <Adduser AddModeOn={AddModeOn} />}
+      </div>      
     </div>
   );
 }

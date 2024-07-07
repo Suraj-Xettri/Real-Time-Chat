@@ -36,7 +36,7 @@ const Chat = () => {
 
   const handleSend = async () => {
     if (message === "") return;
-
+  
     try {
       await updateDoc(doc(db, "chats", chatId), {
         messages: arrayUnion({
@@ -45,29 +45,32 @@ const Chat = () => {
           createdAt: new Date()
         })
       });
-
+  
       const userIds = [currentUser.id, user.id];
-
+  
       userIds.forEach(async (id) => {
         const userChatRef = doc(db, "usersChats", id);
         const userChatSnapshot = await getDoc(userChatRef);
-
+  
         if (userChatSnapshot.exists()) {
           const userChatsData = userChatSnapshot.data();
           const chatIndex = userChatsData.chats.findIndex(
             (c) => c.chatId === chatId
           );
-
+  
           userChatsData.chats[chatIndex].lastMessage = message;
           userChatsData.chats[chatIndex].isSeen =
             id === currentUser.id ? true : false;
           userChatsData.chats[chatIndex].updatedAt = Date.now();
-
+  
           await updateDoc(userChatRef, {
             chats: userChatsData.chats,
           });
         }
       });
+  
+      setMessage(''); // Clear the input field after sending the message
+  
     } catch (error) {
       console.log(error);
     }
@@ -104,6 +107,7 @@ const Chat = () => {
           <input type="text" onChange={handleMessage} 
           placeholder={isCurrentUSerBloked || isReceiverBloked ? 'You Cannot message this person' : 'Type a message' } 
           className='p-2 flex-1 border-none rounded-xl bg-gray-700 outline-none text-white' 
+          value={message}
           />
 
           <div>

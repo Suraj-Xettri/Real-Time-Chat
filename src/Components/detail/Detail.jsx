@@ -27,7 +27,7 @@ const Detail = () => {
   return (
     <div className='flex-1'>
       <div className="flex flex-col items-center gap-4 p-5 border-b">
-        <img src={isCurrentUSerBloked || isReceiverBloked? "/user.png":user?.avatar || "/user.png"} alt="" className='w-28 h-28 rounded-full' />
+        <img src={isCurrentUSerBloked || isReceiverBloked? "/user.png":user?.avatar || "/user.png"} alt="" className='w-[100px] h-[100px] rounded-full' />
         <h2 className='font-semibold text-2xl'>{isCurrentUSerBloked || isReceiverBloked? "User" :user?.username}</h2>
         <p>{isCurrentUSerBloked || isReceiverBloked? "You cannot get access to this person" :"Hello stay in touch through chatting"}</p>
       </div>
