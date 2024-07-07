@@ -2,8 +2,10 @@ import { arrayUnion, collection, doc, getDocs, query, serverTimestamp, setDoc, u
 import React, { useState } from 'react';
 import { db } from '../../library/Firebase';
 import { userStore } from '../../library/userStore';
+import { toast } from 'react-toastify';
+import { IoCloseCircle } from "react-icons/io5";
 
-const Adduser = () => {
+const Adduser = ({ AddModeOn }) => {
   const [user, setUser] = useState(null);
 
   const {currentUser} = userStore()
@@ -65,6 +67,9 @@ const Adduser = () => {
         })
         
       })
+
+      toast.success("Added Successfully")
+      AddModeOn(); 
       
       
     } catch (error) {
@@ -74,6 +79,10 @@ const Adduser = () => {
 
   return (
     <div className='p-7 bg-gray-800 absolute rounded-xl top-0 bottom-0 left-0 right-0 m-auto h-max w-max '>
+      <div className='relative h-3 w-full'>
+        <IoCloseCircle onClick={AddModeOn} className='absolute -right-6 bottom-1 cursor-pointer  text-white text-3xl'/>
+      </div>
+     
       <form onSubmit={handleSearch} className='flex gap-5'>
         <input
           className='p-3 rounded-lg border-none outline-none'

@@ -95,7 +95,7 @@ export const ChatList = () => {
           </div>
         ))}
       </div>
-      {addMode && <Adduser  />}
+      {addMode && <Adduser AddModeOn={AddModeOn} />}
     </div>
   );
 }
