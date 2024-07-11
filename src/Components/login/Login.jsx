@@ -4,7 +4,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'fire
 import { auth, db } from '../../library/Firebase';
 import { doc, setDoc } from 'firebase/firestore';
 import upload from '../../library/upload';
-
+import "./login.css"
 const Login = () => {
   const [avatar, setAvatar] = useState({
     file: null,
@@ -180,6 +180,27 @@ const Login = () => {
           </div>
         </form>
       </div>
+
+        {/* <form className="form flex-1">
+          <p className="title">Register </p>
+          <p className="message">Signup now and get full access to our app. </p>
+              
+          <label>
+              <input required="" placeholder="" type="text" className="input"/>
+              <span>Username</span>
+          </label>
+              
+          <label>
+              <input required="" placeholder="" type="email" className="input"/>
+              <span>Email</span>
+          </label> 
+              
+          <label>
+              <input required="" placeholder="" type="password" className="input"/>
+              <span>Password</span>
+          </label>
+          <button className="submit">Submit</button>
+        </form> */}
     </div>
   );
 };
