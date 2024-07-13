@@ -28,7 +28,7 @@ function App() {
 
   return (
     <>
-    <div className="h-[90vh] w-[90vw] flex bg-blue-400/50 rounded-md backdrop-blur-sm backdrop-saturate-150">
+    <div className="h-[90vh] w-[90vw] flex justify-center bg-blue-400/50 rounded-md backdrop-blur-sm backdrop-saturate-150">
       {currentUser ? (
         <>
           <Friends />

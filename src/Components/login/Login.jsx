@@ -142,7 +142,10 @@ const Login = () => {
                 <button disabled={loading} type="submit" className="submit">
                   {loading ? "Loading" : "Log In"}
                 </button>
+
+                <p className="text-center">Forgot Password ?</p>
               </form>
+             
             </div>
           </div>
         )
