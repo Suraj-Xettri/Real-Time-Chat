@@ -7,7 +7,9 @@ import {
 import { auth, db } from "../../library/Firebase";
 import { doc, setDoc } from "firebase/firestore";
 import upload from "../../library/upload";
-import "./login.css";
+import Register from "./Register";
+import "./logintwo.css";
+
 const Login = () => {
   const [avatar, setAvatar] = useState({
     file: null,
@@ -76,111 +78,76 @@ const Login = () => {
     }
   };
 
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  const handleToggle = () => {
+    setIsFlipped(!isFlipped);
+  };
+
   return (
-    <div className="flex w-full h-full gap-24 justify-between items-center p-5">
-      <div className="flex-1 flex flex-col gap-5 items-center">
-        <h2 className="text-2xl font-bold">Welcome To React Chat</h2>
-        <form onSubmit={handleLogin}>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="email"
-            >
-              Email
-            </label>
-            <input
-              id="email"
-              type="email"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="Enter your email"
-              name="email"
+    <div className="flex w-[80%] h-[80%] flex-col items-center pt-10 bg-transparent">
+      <div className="relative">
+        <label className="flex flex-col items-center">
+          <input
+            type="checkbox"
+            className="sr-only"
+            checked={isFlipped}
+            onChange={handleToggle}
+          />
+          <div className="relative inline-block w-12 h-6 bg-gray-300 rounded-full transition-colors duration-300 ease-in-out">
+            <span
+              className={`absolute left-0 top-0 w-6 h-6 bg-white rounded-full shadow-md transform transition-transform duration-300 ease-in-out ${
+                isFlipped ? "translate-x-6" : ""
+              }`}
             />
           </div>
-          <div className="mb-6">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="password"
-            >
-              Password
-            </label>
-            <input
-              id="password"
-              type="password"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="Enter your password"
-              name="password"
-            />
+          <div className="mt-2 text-lg font-semibold">
+            {isFlipped ? "Sign up" : "Log in"}
           </div>
-          <div className="flex items-center justify-center">
-            <button
-              disabled={loading}
-              className="loading bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="submit"
-            >
-              {loading ? "Loading" : "Log In"}
-            </button>
-          </div>
-        </form>
+        </label>
       </div>
 
-      <div className="seperate h-[80%] w-0.5 bg-gray-300"></div>
+      {
+        isFlipped ? (
+          <Register
+            loading={loading}
+            avatar={avatar}
+            handleRegister={handleRegister}
+            handleAvatar={handleAvatar}
+          />
+        ) : (
+          <div className="flex-1 flex flex-col gap-5 items-center">
+            <div className="flex-1">
+              <form className="form" onSubmit={handleLogin}>
+                <p className="title">Welcome Back </p>
+                <p className="message">
+                 Log in to get full access to app.
+                </p>
+                <label>
+                  <input required type="email" className="input" name="email" />
+                  <span>Email</span>
+                </label>
 
-      <div className="flex-1 flex flex-col gap-5 items-center">
-        <div className="flex-1">
-          <form className="form" onSubmit={handleRegister}>
-            <p className="title">Register </p>
-            <p className="message">Signup now and get full access to app. </p>
+                <label>
+                  <input
+                    required
+                    placeholder=""
+                    type="password"
+                    className="input"
+                    name="password"
+                  />
+                  <span>Password</span>
+                </label>
 
-            <label>
-              <input required type="text" className="input" name="username" />
-              <span>Username</span>
-            </label>
-
-            <label>
-              <input required type="email" className="input" name="email" />
-              <span>Email</span>
-            </label>
-
-            <label>
-              <input
-                required
-                placeholder=""
-                type="password"
-                className="input"
-                name="password"
-              />
-              <span>Password</span>
-            </label>
-
-            <div>
-              <label
-                className="flex items-center gap-3 text-gray-600 cursor-pointer text-sm font-bold mb-2"
-                htmlFor="file"
-              >
-                <img
-                  src={avatar.url || "/user.png"}
-                  alt="User Image"
-                  className="w-8 h-8 rounded-full"
-                />
-                Upload an Image
-              </label>
-              <input
-                id="file"
-                type="file"
-                style={{ display: "none" }}
-                onChange={handleAvatar}
-              />
+                <button disabled={loading} type="submit" className="submit">
+                  {loading ? "Loading" : "Log In"}
+                </button>
+              </form>
             </div>
-            <button disabled={loading} type="submit" className="submit">
-              {loading ? "Loading" : "Register"}
-            </button>
-
-            <p>Alerady have account ?<a href="">Log in</a></p>
-          </form>
-        </div>
-      </div>
+          </div>
+        )
+      }
     </div>
   );
 };
-
 export default Login;

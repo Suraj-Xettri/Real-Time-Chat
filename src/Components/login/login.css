@@ -3,15 +3,16 @@
     flex-direction: column;
     gap: 10px;
     min-width: 340px;
-    background-color: #fff;
+    background-color: transparent;
     padding: 20px;
     border-radius: 20px;
+    border: 1px solid rgb(96, 94, 94);
     position: relative;
   }
   
   .title {
     font-size: 28px;
-    color: royalblue;
+    color: white;
     font-weight: 600;
     letter-spacing: -1px;
     position: relative;
@@ -27,7 +28,7 @@
     width: 16px;
     border-radius: 50%;
     left: 0px;
-    background-color: royalblue;
+    background-color: rgb(31, 82, 234);
   }
   
   .title::before {
@@ -45,6 +46,7 @@
   .message, .signin {
     color: rgba(88, 87, 87, 0.822);
     font-size: 14px;
+    padding-bottom: 8px;
   }
   
   .signin {
