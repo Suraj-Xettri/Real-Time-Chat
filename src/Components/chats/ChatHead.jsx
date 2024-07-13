@@ -8,7 +8,7 @@ const ChatHead = () => {
   const {user, isCurrentUSerBloked, isReceiverBloked} =
   userChatStore()
   return (
-    <div className='flex p-3 justify-between items-center border-b'>
+    <div className='flex w-full p-3 justify-between items-center border-b'>
         <div className="flex items-center gap-3" >
             <img src={isCurrentUSerBloked || isReceiverBloked? "/user.png":user?.avatar || "/user.png"} className='w-10 h-10 rounded-full cursor-pointer'/>
             <div>
@@ -17,7 +17,7 @@ const ChatHead = () => {
             </div>
         </div>
 
-        <div className='flex items-center gap-4'>
+        <div className='flex justify-end items-center gap-4'>
             <IoCall className='cursor-pointer text-2xl'/>
             <FaVideo className='cursor-pointer text-2xl'/>
             <IoMdInformationCircle className='cursor-pointer text-2xl'/>

@@ -83,15 +83,15 @@ const Chat = () => {
   };
 
   return (
-    <div className="flex-[2] border-r flex flex-col">
+    <div className="flex-[2] w-full border-r flex flex-col">
       <ChatHead />
 
-      <div className="chat flex-1 p-3 flex flex-col gap-5 overflow-scroll">
+      <div className="chat flex-[2] p-3 flex flex-col gap-5 overflow-scroll">
         {chat?.messages?.map((message) => (
           <div
             className={
               message.senderId === currentUser.id
-                ? "message owner flex gap-2"
+                ? "message owner gap-2"
                 : "message flex gap-2"
             }
             key={message.createdAt}
@@ -114,26 +114,24 @@ const Chat = () => {
         </div>
       ) : (
         <div className="flex w-full border-t justify-between p-3 items-center gap-3">
-          <div className="flex gap-3 text-2xl">
+          <div className="flex-1 flex gap-3 text-2xl">
             <FaRegImage className="cursor-pointer" />
             <IoCameraSharp className="cursor-pointer" />
             <MdKeyboardVoice className="cursor-pointer" />
           </div>
-          <div className="flex-1 flex">
-            <input
-              type="text"
-              onChange={handleMessage}
-              placeholder="Type a message"
-              className="p-2 w-full border-none rounded-xl bg-gray-700 outline-none text-white"
-              value={message}
-            />
+          <input
+            type="text"
+            onChange={handleMessage}
+            placeholder="Type a message"
+            className="flex-[4] p-2 border-none rounded-xl bg-gray-700 outline-none text-white"
+            value={message}
+          />
+           <FaRegFaceSmile className="text-2xl cursor-pointer" />
+          <div className="flex-1 flex justify-center items-center gap-3">
+            <button onClick={handleSend} className="border p-2 rounded-xl">
+              Send
+            </button>
           </div>
-          <div>
-            <FaRegFaceSmile className="text-2xl cursor-pointer" />
-          </div>
-          <button onClick={handleSend} className="border p-2 rounded-xl">
-            Send
-          </button>
         </div>
       )}
     </div>

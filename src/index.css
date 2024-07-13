@@ -29,7 +29,7 @@ body{
 }
 
 .message{
-    max-width: 70%;
+    max-width: 100%;
     &.owner{
         align-self: flex-end;
 

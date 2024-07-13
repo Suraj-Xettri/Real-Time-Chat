@@ -88,9 +88,9 @@ export const ChatList = () => {
 
       <div className="messages h-[500px] chat p-3 flex flex-col gap-5 overflow-scroll">
         {filteredChats.map((chat,i) => (
-          <div onClick={() => handleSelect(chat)} className="flex p-5 gap-5 cursor-pointer items-center border-b" key={i} style={{backgroundColor: chat?.isSeen ? "transparent": "#5183fe"}}>
+          <div onClick={() => handleSelect(chat)} className="flex p-2 gap-5 cursor-pointer items-center border-b" key={i} style={{backgroundColor: chat?.isSeen ? "transparent": "#5183fe"}}>
             <img src={isCurrentUSerBloked || isReceiverBloked? "/user.png":chat.user?.avatar || "/user.png"} className='w-10 h-10 rounded-full cursor-pointer'/>
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-0">
               <span className='font-semibold'>{isCurrentUSerBloked || isReceiverBloked? "User": chat.user.username}</span>
               <p className='text-gray-600'>{chat.lastMessage}</p>
             </div>

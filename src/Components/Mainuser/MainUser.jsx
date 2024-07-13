@@ -14,7 +14,7 @@ const MainUser = () => {
                 <h1>{currentUser.username}</h1>
             </div>
 
-            <div className="flex items-center gap-3 text-xl ">
+            <div className="flex items-center justify-end gap-3 text-xl ">
                 <IoIosMore className='cursor-pointer'/>
                 <FaVideo className='cursor-pointer'/>
                 <FaEdit className='cursor-pointer'/>
