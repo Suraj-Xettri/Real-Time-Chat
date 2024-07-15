@@ -8,7 +8,7 @@ import { auth, db } from "../../library/Firebase";
 import { doc, setDoc } from "firebase/firestore";
 import upload from "../../library/upload";
 import Register from "./Register";
-import "./logintwo.css";
+
 
 const Login = () => {
   const [avatar, setAvatar] = useState({
